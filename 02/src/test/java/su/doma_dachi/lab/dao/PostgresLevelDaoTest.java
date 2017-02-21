@@ -28,13 +28,15 @@ class PostgresLevelDaoTest {
     void getAll() {
         DaoFactory daoFactory = new PostgresDaoFactory();
         List<Level> list;
-        try (Connection connection = daoFactory.getConnection()) {
-            LevelDao levelDao = daoFactory.getLevelDao(connection);
+        try (Connection connection = (Connection) daoFactory.getContext()) {
+            GenericDao levelDao = daoFactory.getDao(connection,Level.class);
             list = levelDao.getAll();
             Assert.assertNotNull("Данные не получены",list);
             Assert.assertTrue("Данные не получены",list.size() > 0);
         } catch (SQLException e) {
             logger.error("Проблема с БД", e);
+        } catch (PersistException e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,28 +5,16 @@ import su.doma_dachi.lab.dao.Tables.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Created by User on 21.02.2017.
- */
-public interface DaoFactory {
-//    public static final int XML = 1;
-//    public static final int POSTGRES = 2;
+/** Фабрика объектов для работы с базой данных */
+public interface DaoFactory<Context> {
 
-    public Connection getConnection()throws SQLException;
-    public LevelDao getLevelDao(Connection connection);
-    public UserDao getUserDao(Connection connection);
-    public ArticleDao getArticleDao(Connection connection);
-    public ReviewDao getReviewDao(Connection connection);
-    public AuthorDao getAuthorDao(Connection connection);
+    public interface DaoCreator<Context> {
+        public GenericDao create(Context context);
+    }
 
-    /*public static DaoFactory getDaoFactory(int whichFactory){
-        switch (whichFactory){
-            case XML:
-              //  return new XmlDaoFactory();
-            case POSTGRES:
-                return new PostgresDaoFactory();
-            default:
-                return null;
-        }
-    }*/
+    /** Возвращает подключение к базе данных */
+    public Context getContext() throws PersistException;
+
+    /** Возвращает объект для управления персистентным состоянием объекта */
+    public GenericDao getDao(Context context, Class dtoClass) throws PersistException;
 }

@@ -3,16 +3,20 @@ package su.doma_dachi.lab.dao;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import su.doma_dachi.lab.dao.Tables.*;
+import su.doma_dachi.lab.domain.Level;
+import su.doma_dachi.lab.domain.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by User on 21.02.2017.
 
      */
-public class PostgresDaoFactory implements DaoFactory {
+public class PostgresDaoFactory implements DaoFactory<Connection> {
     private static final Logger logger = Logger.getLogger(su.doma_dachi.lab.dao.PostgresDaoFactory.class);
 
     static {
@@ -24,42 +28,47 @@ public class PostgresDaoFactory implements DaoFactory {
     public static final String NAME = "postgres";
     public static final String PASSWORD = "hH1508985";
 
+    private Map<Class, DaoCreator> creators;
     @Override
-    public Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DBURL, NAME, PASSWORD);
+    public Connection getContext() throws PersistException {
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(DBURL, NAME, PASSWORD);
+        } catch (SQLException e) {
+            throw new PersistException(e);
+        }
+        return  connection;
+    }
+
+    @Override
+    public GenericDao getDao(Connection connection, Class dtoClass) throws PersistException {
+        DaoCreator creator = creators.get(dtoClass);
+        if (creator == null) {
+            throw new PersistException("Dao object for " + dtoClass + " not found.");
+        }
+        return creator.create(connection);
     }
 
     public PostgresDaoFactory() {
         try {
-            Class.forName(DRIVER);
+            Class.forName(DRIVER);//Регистрируем драйвер
         } catch (ClassNotFoundException e) {
-            logger.info(e);
+            e.printStackTrace();
         }
-    }
 
-    @Override
-    public LevelDao getLevelDao(Connection connection) {
-        return new PostgresLevelDao(connection);
-    }
-
-    @Override
-    public UserDao getUserDao(Connection connection) {
-        return null;
-    }
-
-    @Override
-    public ArticleDao getArticleDao(Connection connection) {
-        return null;
-    }
-
-    @Override
-    public ReviewDao getReviewDao(Connection connection) {
-        return null;
-    }
-
-    @Override
-    public AuthorDao getAuthorDao(Connection connection) {
-        return null;
+        creators = new HashMap<Class, DaoCreator>();
+        creators.put(Level.class, new DaoCreator<Connection>() {
+            @Override
+            public GenericDao create(Connection connection) {
+                return new PostgresLevelDao(PostgresDaoFactory.this, connection);
+            }
+        });
+        creators.put(User.class, new DaoCreator<Connection>() {
+            @Override
+            public GenericDao create(Connection connection) {
+                return new PostgresUserDao(PostgresDaoFactory.this, connection);
+            }
+        });
     }
 }
 

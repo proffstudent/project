@@ -7,18 +7,18 @@ import java.io.Serializable;
 /**
  * Created by User on 21.02.2017.
  */
-public class Level implements Identified {
-    private Integer idLevel = null;
+public class Level implements Identified<Integer> {
+    private Integer id = null;
     private int number;
     private String access;
 
     @Override
     public Integer getId() {
-        return idLevel;
+        return id;
     }
 
     public void setId(int idLevel){
-        this.idLevel = idLevel;
+        this.id = idLevel;
     }
 
     public String getAccess(){
