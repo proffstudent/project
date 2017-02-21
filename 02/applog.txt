@@ -4,3 +4,8 @@ INFO    2017-02-21 00:08:26,549 [main] su.doma_dachi.lab.Reviews  - Application 
 INFO    2017-02-21 00:08:26,550 [main] su.doma_dachi.lab.Reviews  - Application finished
 INFO    2017-02-21 00:35:32,893 [main] su.doma_dachi.lab.Reviews  - Application started
 INFO    2017-02-21 00:35:32,894 [main] su.doma_dachi.lab.Reviews  - Application finished
+INFO    2017-02-21 22:29:30,418 [main] su.doma_dachi.lab.Reviews  - Application started
+INFO    2017-02-21 22:29:30,419 [main] su.doma_dachi.lab.Reviews  - Application finished
+INFO    2017-02-21 23:08:34,249 [main] su.doma_dachi.lab.dao.PostgresDaoFactory  - java.lang.ClassNotFoundException: org.postgresql.Driver
+INFO    2017-02-21 23:11:33,817 [main] su.doma_dachi.lab.dao.PostgresDaoFactory  - java.lang.ClassNotFoundException: org.postgresql.Driver
+INFO    2017-02-21 23:26:04,125 [main] su.doma_dachi.lab.dao.PostgresDaoFactory  - java.lang.ClassNotFoundException: org.postgresql.Driver

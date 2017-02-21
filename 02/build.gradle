@@ -18,7 +18,10 @@ dependencies {
     // TestNG is also supported by the Gradle Test task. Just change the
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.0-M3")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.0-M3")
     testCompile 'junit:junit:4.12'
+    compile 'org.postgresql:postgresql:42.0.0.jre7'
     compile group: '02T', name: '02', version:'1.0-SNAPSHOT'
 }
 
