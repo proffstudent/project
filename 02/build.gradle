@@ -1,0 +1,28 @@
+group '02T'
+version '1.0-SNAPSHOT'
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile "log4j:log4j:1.2.17"
+
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+    testCompile 'junit:junit:4.12'
+    compile group: '02T', name: '02', version:'1.0-SNAPSHOT'
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "3.4"
+}
