@@ -1,5 +1,8 @@
-package su.doma_dachi.lab.dao;
+package su.doma_dachi.lab.postgres;
 
+import su.doma_dachi.lab.dao.AbstractDao;
+import su.doma_dachi.lab.dao.DaoFactory;
+import su.doma_dachi.lab.dao.PersistException;
 import su.doma_dachi.lab.dao.Tables.LevelDao;
 import su.doma_dachi.lab.domain.Level;
 
@@ -14,7 +17,7 @@ import java.util.List;
 /**
  * Created by User on 21.02.2017.
  */
-public class PostgresLevelDao extends AbstractDao <Level, Integer>{
+public class PostgresLevelDao extends AbstractDao<Level, Integer> {
 
     private class PersistLevel extends Level {
         public void setId(int id) {

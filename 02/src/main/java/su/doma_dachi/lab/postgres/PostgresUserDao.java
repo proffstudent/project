@@ -1,4 +1,7 @@
-package su.doma_dachi.lab.dao;
+package su.doma_dachi.lab.postgres;
+
+import su.doma_dachi.lab.dao.GenericDao;
+import su.doma_dachi.lab.dao.PersistException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
