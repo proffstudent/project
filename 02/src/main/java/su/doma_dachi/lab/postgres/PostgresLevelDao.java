@@ -83,10 +83,10 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
         LinkedList<Level> result = new LinkedList<Level>();
         try {
             while (rs.next()) {
-                PersistLevel group = new PersistLevel();
-                group.setId(rs.getInt("idlevel"));
-                group.setAccess(rs.getString("Access"));
-                result.add(group);
+                PersistLevel level = new PersistLevel();
+                level.setId(rs.getInt("idlevel"));
+                level.setAccess(rs.getString("Access"));
+                result.add(level);
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -126,8 +126,6 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
         level.setAccess(rs.getString("Access"));
         return level;
     }
-
-
 
     @Override
     public List<Level> getAll() throws SQLException {

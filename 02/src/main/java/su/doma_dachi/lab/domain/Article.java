@@ -26,7 +26,7 @@ public class Article implements Identified<Integer> {
         return idArticle;
     }
 
-    public void setidArticle(Integer idArticle) {
+    public void setId(Integer idArticle) {
         this.idArticle = idArticle;
     }
 
