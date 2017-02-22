@@ -17,6 +17,7 @@ public class User implements Identified<Integer> {
     private Date createdAt;
     private Date updatedAt;
     private boolean enabled;
+    private String sex;
     private Date birth;
     private String residence;
     private String education;
@@ -32,7 +33,7 @@ public class User implements Identified<Integer> {
         return idUser;
     }
 
-    protected void setIdUser(Integer idUser) {
+    protected void setId(Integer idUser) {
         this.idUser = idUser;
     }
 
@@ -98,6 +99,14 @@ public class User implements Identified<Integer> {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public Date getBirth() {

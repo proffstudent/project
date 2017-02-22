@@ -3,7 +3,6 @@ package su.doma_dachi.lab.postgres;
 import su.doma_dachi.lab.dao.AbstractDao;
 import su.doma_dachi.lab.dao.DaoFactory;
 import su.doma_dachi.lab.dao.PersistException;
-import su.doma_dachi.lab.dao.Tables.LevelDao;
 import su.doma_dachi.lab.domain.Level;
 
 import java.sql.Connection;
@@ -56,7 +55,7 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
     public Level getByPK(int key) throws SQLException, PersistException {
         List<Level> list;
         String sql = getSelectQuery();
-        sql += " WHERE id = ?";
+        sql += " WHERE idLevel = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -111,34 +110,5 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
         } catch (Exception e) {
             throw new PersistException(e);
         }
-    }
-
-    public Level read(int key) throws SQLException {
-        String sql = "SELECT * FROM Levels WHERE idlevel = ?;";
-        PreparedStatement statement = connection.prepareStatement(sql);
-
-        statement.setInt(1, key);
-
-        ResultSet rs = statement.executeQuery();
-        rs.next();
-        Level level= new Level();
-        level.setId(rs.getInt("idLevel"));
-        level.setAccess(rs.getString("Access"));
-        return level;
-    }
-
-    @Override
-    public List<Level> getAll() throws SQLException {
-        String sql= "SELECT * FROM Levels;";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet rs = statement.executeQuery();
-        List<Level> list = new ArrayList<>();
-        while (rs.next()){
-            Level level = new Level();
-            level.setId(rs.getInt("idLevel"));
-            level.setAccess(rs.getString("Access"));
-            list.add(level);
-        }
-        return list;
     }
 }

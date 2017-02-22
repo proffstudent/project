@@ -20,7 +20,7 @@ public class Review implements Identified<Integer> {
         return idReview;
     }
 
-    public void setIdReview(Integer idReview) {
+    public void setId(Integer idReview) {
         this.idReview = idReview;
     }
 

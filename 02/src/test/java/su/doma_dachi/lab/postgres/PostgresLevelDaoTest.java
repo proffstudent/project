@@ -1,11 +1,13 @@
-package su.doma_dachi.lab.dao;
+package su.doma_dachi.lab.postgres;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import su.doma_dachi.lab.dao.DaoFactory;
+import su.doma_dachi.lab.dao.GenericDao;
+import su.doma_dachi.lab.dao.PersistException;
 import su.doma_dachi.lab.domain.Level;
-import su.doma_dachi.lab.postgres.PostgresDaoFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;

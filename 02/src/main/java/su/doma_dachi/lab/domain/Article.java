@@ -17,7 +17,7 @@ public class Article implements Identified<Integer> {
     private String pathAnnotEng;
     private String pathListLiter;
     private Date dateSend;
-    private Date dateAdoptation;
+    private Date dateAdoption;
     private Date datePubl;
     private String url;
 
@@ -94,12 +94,12 @@ public class Article implements Identified<Integer> {
         this.dateSend = dateSend;
     }
 
-    public Date getDateAdoptation() {
-        return dateAdoptation;
+    public Date getDateAdoption() {
+        return dateAdoption;
     }
 
-    public void setDateAdoptation(Date dateAdoptation) {
-        this.dateAdoptation = dateAdoptation;
+    public void setDateAdoption(Date dateAdoption) {
+        this.dateAdoption = dateAdoption;
     }
 
     public Date getDatePubl() {

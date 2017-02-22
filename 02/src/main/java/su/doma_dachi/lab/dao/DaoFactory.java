@@ -1,6 +1,5 @@
 package su.doma_dachi.lab.dao;
 
-import su.doma_dachi.lab.dao.Tables.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -8,14 +8,14 @@ import su.doma_dachi.lab.dao.Identified;
 public class Author implements Identified<Integer> {
     private Integer idAuthor = null;
     private User user;
-    private Author author;
+    private Article article;
 
     @Override
     public Integer getId() {
         return idAuthor;
     }
 
-    public void setIdAuthor(Integer idAuthor) {
+    public void setId(Integer idAuthor) {
         this.idAuthor = idAuthor;
     }
 
@@ -27,11 +27,11 @@ public class Author implements Identified<Integer> {
         this.user = user;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Article getArticle() {
+        return article;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

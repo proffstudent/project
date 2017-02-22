@@ -6,17 +6,13 @@ import su.doma_dachi.lab.dao.PersistException;
 import su.doma_dachi.lab.domain.Article;
 import su.doma_dachi.lab.domain.Level;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
-
+public class PostgresArticleDao extends AbstractDao<Article, Integer> {
     private class PersistArticle extends Article {
         public void setId(int id) {
             super.setId(id);
@@ -58,7 +54,7 @@ public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
     public Article getByPK(int key) throws SQLException, PersistException {
         List<Article> list;
         String sql = getSelectQuery();
-        sql += " WHERE id = ?";
+        sql += " WHERE idArticle = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -76,7 +72,7 @@ public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
     }
 
 
-    public PostgresArticlelDao(DaoFactory<Connection> parentFactory, Connection connection) {
+    public PostgresArticleDao(DaoFactory<Connection> parentFactory, Connection connection) {
         super(parentFactory, connection);
     }
 
@@ -85,10 +81,20 @@ public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
         LinkedList<Article> result = new LinkedList<>();
         try {
             while (rs.next()) {
-                PersistArticle group = new PersistArticle();
-                group.setId(rs.getInt("idArticle"));
-                group.setTitle(rs.getString("title"));
-                result.add(group);
+                PersistArticle article = new PersistArticle();
+                article.setId(rs.getInt("idArticle"));
+                article.setTitle(rs.getString("title"));
+                article.setSubject(rs.getString("subject"));
+                article.setDontPubl(rs.getBoolean("dontpubl"));
+                article.setPathArticle(rs.getString("patharticle"));
+                article.setPathAnnotRus(rs.getString("pathannotrus"));
+                article.setPathAnnotEng(rs.getString("pathannoteng"));
+                article.setPathListLiter(rs.getString("pathlistliter"));
+                article.setDateSend(rs.getDate("datesend"));
+                article.setDateAdoption(rs.getDate("dateadoption"));
+                article.setDatePubl(rs.getDate("datepubl"));
+                article.setUrl(rs.getString("url"));
+                result.add(article);
             }
         } catch (Exception e) {
             throw new PersistException(e);
@@ -100,6 +106,16 @@ public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
     protected void prepareStatementForInsert(PreparedStatement statement, Article object) throws PersistException {
         try {
             statement.setString(1, object.getTitle());
+            statement.setString(2, object.getSubject());
+            statement.setBoolean(3, object.isDontPubl());
+            statement.setString(4, object.getPathArticle());
+            statement.setString(5, object.getPathAnnotRus());
+            statement.setString(6, object.getPathAnnotEng());
+            statement.setString(7, object.getPathListLiter());
+            statement.setDate(8, (Date) object.getDateSend());
+            statement.setDate(9, (Date) object.getDateAdoption());
+            statement.setDate(10, (Date) object.getDatePubl());
+            statement.setString(11, object.getUrl());
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -109,38 +125,19 @@ public class PostgresArticlelDao extends AbstractDao<Article, Integer> {
     protected void prepareStatementForUpdate(PreparedStatement statement, Article object) throws PersistException {
         try {
             statement.setString(1, object.getTitle());
-            statement.setInt(2, object.getId());
+            statement.setString(2, object.getSubject());
+            statement.setBoolean(3, object.isDontPubl());
+            statement.setString(4, object.getPathArticle());
+            statement.setString(5, object.getPathAnnotRus());
+            statement.setString(6, object.getPathAnnotEng());
+            statement.setString(7, object.getPathListLiter());
+            statement.setDate(8, (Date) object.getDateSend());
+            statement.setDate(9, (Date) object.getDateAdoption());
+            statement.setDate(10, (Date) object.getDatePubl());
+            statement.setString(11, object.getUrl());
+            statement.setInt(12, object.getId());
         } catch (Exception e) {
             throw new PersistException(e);
         }
-    }
-
-    public Article read(int key) throws SQLException {
-        String sql = "SELECT * FROM Levels WHERE idlevel = ?;";
-        PreparedStatement statement = connection.prepareStatement(sql);
-
-        statement.setInt(1, key);
-
-        ResultSet rs = statement.executeQuery();
-        rs.next();
-        Article article= new Article();
-        article.setId(rs.getInt("idArticle"));
-        article.setTitle(rs.getString("Title"));
-        return article;
-    }
-
-    @Override
-    public List<Article> getAll() throws SQLException {
-        String sql= "SELECT * FROM Articles;";
-        PreparedStatement statement = connection.prepareStatement(sql);
-        ResultSet rs = statement.executeQuery();
-        List<Article> list = new ArrayList<>();
-        while (rs.next()){
-            Article article = new Article();
-            article.setId(rs.getInt("idArticle"));
-            article.setTitle(rs.getString("Title"));
-            list.add(article);
-        }
-        return list;
     }
 }

@@ -5,8 +5,7 @@ import org.apache.log4j.PropertyConfigurator;
 import su.doma_dachi.lab.dao.DaoFactory;
 import su.doma_dachi.lab.dao.GenericDao;
 import su.doma_dachi.lab.dao.PersistException;
-import su.doma_dachi.lab.domain.Level;
-import su.doma_dachi.lab.domain.User;
+import su.doma_dachi.lab.domain.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -69,6 +68,24 @@ public class PostgresDaoFactory implements DaoFactory<Connection> {
             @Override
             public GenericDao create(Connection connection) {
                 return new PostgresUserDao(PostgresDaoFactory.this, connection);
+            }
+        });
+        creators.put(Article.class, new DaoCreator<Connection>() {
+            @Override
+            public GenericDao create(Connection connection) {
+                return new PostgresArticleDao(PostgresDaoFactory.this, connection);
+            }
+        });
+        creators.put(Author.class, new DaoCreator<Connection>() {
+            @Override
+            public GenericDao create(Connection connection) {
+                return new PostgresAuthorDao(PostgresDaoFactory.this, connection);
+            }
+        });
+        creators.put(Review.class, new DaoCreator<Connection>() {
+            @Override
+            public GenericDao create(Connection connection) {
+                return new PostgresAuthorDao(PostgresDaoFactory.this, connection);
             }
         });
     }
