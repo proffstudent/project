@@ -7,6 +7,7 @@ import java.sql.SQLException;
 /** Фабрика объектов для работы с базой данных */
 public interface DaoFactory<Context> {
 
+
     public interface DaoCreator<Context> {
         public GenericDao create(Context context);
     }

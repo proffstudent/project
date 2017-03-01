@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<articles>
+    <articles>
+        <id>1</id>
+        <title>Хирургическое лечение ожирения</title>
+        <subject>Хирургия</subject>
+        <dontPubl>true</dontPubl>
+        <pathArticle>C:\Articles\Article</pathArticle>
+        <pathAnnotRus>C:\Articles\AnnotRus</pathAnnotRus>
+        <pathAnnotEng>C:\Articles\AnnotEng</pathAnnotEng>
+        <pathListLiter>C:\Articles\ListLiter</pathListLiter>
+        <dateSend>2017-01-12T00:00:00+03:00</dateSend>
+        <dateAdoption>2017-01-14T00:00:00+03:00</dateAdoption>
+        <datePubl>2017-01-18T00:00:00+03:00</datePubl>
+        <url>http:\\articles\sugery\01</url>
+    </articles>
+    <articles>
+        <id>2</id>
+        <title>Познакомьтесь с хирургом по раньше!</title>
+        <subject>Хирургия</subject>
+        <dontPubl>true</dontPubl>
+        <pathArticle>C:\Articles\Article1</pathArticle>
+        <pathAnnotRus>C:\Articles1\AnnotRus1</pathAnnotRus>
+        <pathAnnotEng>C:\Articles1\AnnotEng1</pathAnnotEng>
+        <pathListLiter>C:\Articles1\ListLiter1</pathListLiter>
+        <dateSend>2017-01-25T00:00:00+03:00</dateSend>
+        <dateAdoption>2017-01-30T00:00:00+03:00</dateAdoption>
+        <datePubl>2017-02-02T00:00:00+03:00</datePubl>
+        <url>http:\\articles\sugery\02</url>
+    </articles>
+</articles>

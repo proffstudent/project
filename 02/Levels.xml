@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<levels>
+    <levels>
+        <id>1</id>
+        <access>Admin</access>
+    </levels>
+    <levels>
+        <id>2</id>
+        <access>Moderator</access>
+    </levels>
+    <levels>
+        <id>3</id>
+        <access>Reviewer</access>
+    </levels>
+    <levels>
+        <id>4</id>
+        <access>Author</access>
+    </levels>
+</levels>

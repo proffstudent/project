@@ -121,7 +121,7 @@ public abstract class AbstractDao<T extends Identified<PK>, PK extends Integer> 
             throw new PersistException(e);
         }
         // Получаем только что вставленную запись
-        sql = getSelectQuery() + " WHERE id = last_insert_id();";
+        sql = getSelectQuery() + " WHERE id = (" + getLastID() +")";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
             List<T> list = parseResultSet(rs);
@@ -134,6 +134,8 @@ public abstract class AbstractDao<T extends Identified<PK>, PK extends Integer> 
         }
         return persistInstance;
     }
+
+    protected abstract String getLastID();
 
     @Override
     public void update(T object) throws PersistException {

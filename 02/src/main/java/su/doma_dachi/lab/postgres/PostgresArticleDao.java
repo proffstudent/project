@@ -21,7 +21,7 @@ public class PostgresArticleDao extends AbstractDao<Article, Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT idArticle, title, subject, dontpubl, patharticle, pathannotrus, pathannoteng, pathlistliter," +
+        return "SELECT id, title, subject, dontpubl, patharticle, pathannotrus, pathannoteng, pathlistliter," +
                 "datesend, dateadoption, datepubl, url FROM articles";
     }
 
@@ -36,12 +36,12 @@ public class PostgresArticleDao extends AbstractDao<Article, Integer> {
     public String getUpdateQuery() {
         return "UPDATE Articles SET title = ?, subject = ?, dontpubl = ?, patharticle = ?, pathannotrus = ?, " +
                 "pathannoteng = ?, pathlistliter = ?, datesend = ?, dateadoption = ?, datepubl = ?," +
-                "url = ? WHERE idArticle= ?;";
+                "url = ? WHERE id= ?;";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM Articles WHERE idArticle= ?;";
+        return "DELETE FROM Articles WHERE id= ?;";
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PostgresArticleDao extends AbstractDao<Article, Integer> {
     public Article getByPK(int key) throws SQLException, PersistException {
         List<Article> list;
         String sql = getSelectQuery();
-        sql += " WHERE idArticle = ?";
+        sql += " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -82,7 +82,7 @@ public class PostgresArticleDao extends AbstractDao<Article, Integer> {
         try {
             while (rs.next()) {
                 PersistArticle article = new PersistArticle();
-                article.setId(rs.getInt("idArticle"));
+                article.setId(rs.getInt("id"));
                 article.setTitle(rs.getString("title"));
                 article.setSubject(rs.getString("subject"));
                 article.setDontPubl(rs.getBoolean("dontpubl"));
@@ -139,5 +139,10 @@ public class PostgresArticleDao extends AbstractDao<Article, Integer> {
         } catch (Exception e) {
             throw new PersistException(e);
         }
+    }
+
+    @Override
+    protected String getLastID() {
+        return "SELECT max(id) FROM Articles";
     }
 }

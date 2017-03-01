@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <users>
+        <id>1</id>
+        <getName>Ivan</getName>
+        <email>i.ivanov.stc@innopolis.ru</email>
+        <login>ivanovstc</login>
+        <password>12345</password>
+        <createdAt>2017-01-08T00:00:00+03:00</createdAt>
+        <updatedAt>2017-01-08T00:00:00+03:00</updatedAt>
+        <enabled>true</enabled>
+        <sex>м</sex>
+        <birth>1987-01-10T00:00:00+03:00</birth>
+        <residence>Казань, улица Хансувар, 53</residence>
+        <workplace>Городская клиническая больница № 7</workplace>
+        <position>Окулист</position>
+        <passport>6804 345678</passport>
+        <issuedBy>отделом УФМС России по Свердловской области в Ленинском р-не гор. Екатеринбурга</issuedBy>
+        <addressReg>Казань, улица Хансувар, 53</addressReg>
+        <level>
+            <idLevel>2</idLevel>
+            <access>Moderator</access>
+        </level>
+    </users>
+    <users>
+        <id>2</id>
+        <getName>Petr</getName>
+        <email>p.petrov.stc@innopolis.ru</email>
+        <login>petrovstc</login>
+        <password>12345</password>
+        <createdAt>2017-01-10T00:00:00+03:00</createdAt>
+        <updatedAt>2017-01-10T00:00:00+03:00</updatedAt>
+        <enabled>true</enabled>
+        <sex>м</sex>
+        <birth>1986-08-01T00:00:00+04:00</birth>
+        <residence>Казань, улица Хансувар, 52</residence>
+        <workplace>Городская клиническая больница № 7</workplace>
+        <position>Хирург</position>
+        <passport>3453 345678</passport>
+        <issuedBy>отделом УФМС России по Оренбургской области</issuedBy>
+        <addressReg>Казань, улица Хансувар, 52</addressReg>
+        <level>
+            <idLevel>3</idLevel>
+            <access>Reviewer</access>
+        </level>
+    </users>
+    <users>
+        <id>3</id>
+        <getName>Sergei</getName>
+        <email>s.sergeev.stc@innopolis.ru</email>
+        <login>sergeevstc</login>
+        <password>12345</password>
+        <createdAt>2017-01-12T00:00:00+03:00</createdAt>
+        <updatedAt>2017-01-14T00:00:00+03:00</updatedAt>
+        <enabled>true</enabled>
+        <sex>м</sex>
+        <birth>1990-09-01T00:00:00+04:00</birth>
+        <residence>Казань, улица Хансувар, 23</residence>
+        <workplace>Городская клиническая больница № 7</workplace>
+        <position>Хирург</position>
+        <passport>3453 345678</passport>
+        <issuedBy>отделом УФМС России по Оренбургской области</issuedBy>
+        <addressReg>Казань, улица Хансувар, 23</addressReg>
+        <level>
+            <idLevel>4</idLevel>
+            <access>Author</access>
+        </level>
+    </users>
+    <users>
+        <id>4</id>
+        <getName>Valentina</getName>
+        <email>v.sergeeva.stc@innopolis.ru</email>
+        <login>sergeevastc</login>
+        <password>12345</password>
+        <createdAt>2017-01-25T00:00:00+03:00</createdAt>
+        <updatedAt>2017-01-30T00:00:00+03:00</updatedAt>
+        <enabled>true</enabled>
+        <sex>м</sex>
+        <birth>1991-12-10T00:00:00+02:00</birth>
+        <residence>Казань, улица Хансувар, 11</residence>
+        <workplace>Городская клиническая больница № 7</workplace>
+        <position>Хирург</position>
+        <passport>3453 345678</passport>
+        <issuedBy>отделом УФМС России по Оренбургской области</issuedBy>
+        <addressReg>Казань, улица Хансувар, 11</addressReg>
+        <level>
+            <idLevel>4</idLevel>
+            <access>Author</access>
+        </level>
+    </users>
+</users>

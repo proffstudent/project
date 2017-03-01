@@ -4,7 +4,6 @@ import su.doma_dachi.lab.dao.AbstractDao;
 import su.doma_dachi.lab.dao.DaoFactory;
 import su.doma_dachi.lab.dao.PersistException;
 import su.doma_dachi.lab.domain.Article;
-import su.doma_dachi.lab.domain.Author;
 import su.doma_dachi.lab.domain.Review;
 import su.doma_dachi.lab.domain.User;
 
@@ -22,7 +21,7 @@ public class PostgresReviewDao extends AbstractDao<Review,Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT idReview, idUser, idArticle, pathReview, dateOfReceipt, dateReview FROM Reviews";
+        return "SELECT id, idUser, idArticle, pathReview, dateOfReceipt, dateReview FROM Reviews";
     }
 
     @Override
@@ -34,12 +33,12 @@ public class PostgresReviewDao extends AbstractDao<Review,Integer> {
     @Override
     public String getUpdateQuery() {
         return "UPDATE Reviews SET idUser = ?, idArticle = ?, pathReview= ?, dateOfReceipt= ?, " +
-                "dateReview = ? WHERE idReview = ?;";
+                "dateReview = ? WHERE id = ?;";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM Reviews WHERE idReview = ?;";
+        return "DELETE FROM Reviews WHERE id = ?;";
     }
 
     @Override
@@ -52,7 +51,7 @@ public class PostgresReviewDao extends AbstractDao<Review,Integer> {
     public Review getByPK(int key) throws SQLException, PersistException {
         List<Review> list;
         String sql = getSelectQuery();
-        sql += " WHERE idReview = ?";
+        sql += " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -80,7 +79,7 @@ public class PostgresReviewDao extends AbstractDao<Review,Integer> {
         try {
             while (rs.next()) {
                 PostgresReviewDao.PersistReview review = new PostgresReviewDao.PersistReview();
-                review.setId(rs.getInt("idReview"));
+                review.setId(rs.getInt("id"));
                 review.setUser((User) getDependence(User.class, rs.getInt("idUser")));
                 review.setArticle((Article) getDependence(Article.class, rs.getInt("idArticle")));
                 review.setPathReview(rs.getString("pathReview"));
@@ -128,5 +127,10 @@ public class PostgresReviewDao extends AbstractDao<Review,Integer> {
         } catch (Exception e) {
             throw new PersistException(e);
         }
+    }
+
+    @Override
+    protected String getLastID() {
+        return "SELECT max(id) FROM Reviews";
     }
 }

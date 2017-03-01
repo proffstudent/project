@@ -22,7 +22,7 @@ public class PostgresUserDao extends AbstractDao<User,Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT idUser, name, lastName, email, login, password, createdAt, updatedAt," +
+        return "SELECT id, name, lastName, email, login, password, createdAt, updatedAt," +
                 "enabled, sex, birth, residence, education, workplace, position, passport, issuedBy," +
                 "adrressReg, accessLevel FROM Users";
     }
@@ -39,12 +39,12 @@ public class PostgresUserDao extends AbstractDao<User,Integer> {
     public String getUpdateQuery() {
         return "UPDATE Users SET name = ?, lastName = ?, email = ?, login = ?, password = ?, createdAt = ?," +
                 " updatedAt = ?, enabled = ?, sex = ?, birth = ?, residence = ?, education = ?, workplace = ?," +
-                " position = ?, passport = ?, issuedBy = ?, adrressReg = ?, accessLevel = ? WHERE idUser = ?;";
+                " position = ?, passport = ?, issuedBy = ?, adrressReg = ?, accessLevel = ? WHERE id = ?;";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM Users WHERE idUser= ?;";
+        return "DELETE FROM Users WHERE id= ?;";
     }
 
     @Override
@@ -57,7 +57,7 @@ public class PostgresUserDao extends AbstractDao<User,Integer> {
     public User getByPK(int key) throws SQLException, PersistException {
         List<User> list;
         String sql = getSelectQuery();
-        sql += " WHERE idUser = ?";
+        sql += " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -85,7 +85,7 @@ public class PostgresUserDao extends AbstractDao<User,Integer> {
         try {
             while (rs.next()) {
                 PostgresUserDao.PersistUser user = new PostgresUserDao.PersistUser();
-                user.setId(rs.getInt("idUser"));
+                user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setEmail(rs.getString("email"));
                 user.setLogin(rs.getString("login"));
@@ -166,5 +166,10 @@ public class PostgresUserDao extends AbstractDao<User,Integer> {
         } catch (Exception e) {
             throw new PersistException(e);
         }
+    }
+
+    @Override
+    protected String getLastID() {
+        return "SELECT max(id) FROM Users";
     }
 }

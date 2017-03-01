@@ -5,12 +5,13 @@ DROP TABLE Articles;
 DROP TABLE Levels;
 
 CREATE TABLE Levels(
-	IdLevel SERIAL PRIMARY KEY,
-	Access varchar(100)
+	Id SERIAL PRIMARY KEY,
+	Access varchar(100),
+	UNIQUE(Access)
 );
 
 CREATE TABLE Users(
-	IdUser SERIAL PRIMARY KEY, 
+	Id SERIAL PRIMARY KEY, 
 	Name varchar(50),
 	LastName varchar(50),
     Email varchar(50),
@@ -32,7 +33,7 @@ CREATE TABLE Users(
 	UNIQUE(Login,Email)
 );
 CREATE TABLE Articles(
-	IdArticle SERIAL PRIMARY KEY, 
+	Id SERIAL PRIMARY KEY, 
 	Title varchar(100),
 	Subject varchar(100),
 	DontPubl boolean,
@@ -48,7 +49,7 @@ CREATE TABLE Articles(
 );
 
 CREATE TABLE Reviews(
-	IdReview SERIAL PRIMARY KEY, 
+	Id SERIAL PRIMARY KEY, 
 	IdUser Integer REFERENCES Users,
 	IdArticle Integer REFERENCES Articles,
     PathReview varchar(100),
@@ -57,8 +58,9 @@ CREATE TABLE Reviews(
 );
 
 CREATE TABLE Authors(
-	IdAuthor SERIAL PRIMARY KEY, 
+	Id SERIAL PRIMARY KEY, 
 	IdUser Integer REFERENCES Users,
 	IdArticle Integer REFERENCES Articles
 );
+
 

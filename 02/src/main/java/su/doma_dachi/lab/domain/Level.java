@@ -1,29 +1,50 @@
 package su.doma_dachi.lab.domain;
 
+
 import su.doma_dachi.lab.dao.Identified;
 
-import java.io.Serializable;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
 
 /**
- * Created by User on 21.02.2017.
+ * определяем корневой элемент
  */
+
+
+/**
+ * определяем последовательность тегов в XML
+ */
+@XmlRootElement
+@XmlType(propOrder = {"id","access"})
 public class Level implements Identified<Integer> {
     private Integer id = null;
-    private int number;
     private String access;
 
+    /**
+     * указываем, что id должен быть атрибутом
+     */
+
     @Override
+    @XmlElement(name = "id")
     public Integer getId() {
         return id;
     }
 
-    public void setId(int idLevel){
-        this.id = idLevel;
-    }
-
+    /**
+     * указываем, что поле access должно быть представлено в XML как access
+     */
+    @XmlElement(name = "access")
     public String getAccess(){
         return access;
     }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+
     public void setAccess(String access){
         this.access = access;
     }

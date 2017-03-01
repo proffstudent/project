@@ -22,7 +22,7 @@ public class PostgresAuthorDao extends AbstractDao<Author,Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT idAuthor, idUser, idArticle FROM Authors";
+        return "SELECT id, idUser, idArticle FROM Authors";
     }
 
     @Override
@@ -33,12 +33,12 @@ public class PostgresAuthorDao extends AbstractDao<Author,Integer> {
 
     @Override
     public String getUpdateQuery() {
-        return "UPDATE Authors SET idUser = ?, idArticle = ? WHERE idAuthor = ?;";
+        return "UPDATE Authors SET idUser = ?, idArticle = ? WHERE id = ?;";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM Authors WHERE idAuthor= ?;";
+        return "DELETE FROM Authors WHERE id= ?;";
     }
 
     @Override
@@ -51,7 +51,7 @@ public class PostgresAuthorDao extends AbstractDao<Author,Integer> {
     public Author getByPK(int key) throws SQLException, PersistException {
         List<Author> list;
         String sql = getSelectQuery();
-        sql += " WHERE idAuthor = ?";
+        sql += " WHERE id = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -79,7 +79,7 @@ public class PostgresAuthorDao extends AbstractDao<Author,Integer> {
         try {
             while (rs.next()) {
                 PostgresAuthorDao.PersistAuthor author = new PostgresAuthorDao.PersistAuthor();
-                author.setId(rs.getInt("idAuthor"));
+                author.setId(rs.getInt("id"));
                 author.setUser((User) getDependence(User.class, rs.getInt("idUser")));
                 author.setArticle((Article) getDependence(Article.class, rs.getInt("idArticle")));
                 result.add(author);
@@ -118,5 +118,10 @@ public class PostgresAuthorDao extends AbstractDao<Author,Integer> {
         } catch (Exception e) {
             throw new PersistException(e);
         }
+    }
+
+    @Override
+    protected String getLastID() {
+        return "SELECT max(id) FROM authors";
     }
 }

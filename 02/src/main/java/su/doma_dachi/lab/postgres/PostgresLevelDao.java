@@ -26,23 +26,26 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
 
     @Override
     public String getSelectQuery() {
-        return "SELECT idlevel, access FROM levels";
+        return "SELECT id, access FROM levels";
     }
 
     @Override
     public String getCreateQuery() {
-        return "INSERT INTO levels (access) \n" +
-                "VALUES (?);";
+        return "INSERT INTO levels (access) VALUES (?);";
     }
 
     @Override
+    public String getLastID() {
+        return "SELECT max(id) FROM levels";
+    }
+    @Override
     public String getUpdateQuery() {
-        return "UPDATE levels SET access= ? WHERE idlevel= ?;";
+        return "UPDATE levels SET access= ? WHERE id = ?;";
     }
 
     @Override
     public String getDeleteQuery() {
-        return "DELETE FROM levels WHERE idlevel= ?;";
+        return "DELETE FROM levels WHERE id= ?;";
     }
 
     @Override
@@ -55,7 +58,8 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
     public Level getByPK(int key) throws SQLException, PersistException {
         List<Level> list;
         String sql = getSelectQuery();
-        sql += " WHERE idLevel = ?";
+        sql += " WHERE id = ?";
+
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, key);
             ResultSet rs = statement.executeQuery();
@@ -83,7 +87,7 @@ public class PostgresLevelDao extends AbstractDao<Level, Integer> {
         try {
             while (rs.next()) {
                 PersistLevel level = new PersistLevel();
-                level.setId(rs.getInt("idlevel"));
+                level.setId(rs.getInt("id"));
                 level.setAccess(rs.getString("Access"));
                 result.add(level);
             }

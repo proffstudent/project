@@ -85,7 +85,7 @@ public class PostgresDaoFactory implements DaoFactory<Connection> {
         creators.put(Review.class, new DaoCreator<Connection>() {
             @Override
             public GenericDao create(Connection connection) {
-                return new PostgresAuthorDao(PostgresDaoFactory.this, connection);
+                return new PostgresReviewDao(PostgresDaoFactory.this, connection);
             }
         });
     }
